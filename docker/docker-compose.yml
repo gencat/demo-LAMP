@@ -1,0 +1,20 @@
+db:
+  build: ./bbdd/
+  ports:
+    - 3306:3306
+  environment:
+    MYSQL_USER : user
+    MYSQL_PASSWORD : password
+    MYSQL_ROOT_PASSWORD: root
+    MYSQL_DATABASE: demo
+  volumes:
+   - /home/canigo/demo-LAMP/mysql-datadir:/var/lib/mysql
+demo:
+  build: ./app/
+  links:
+    - db:mybbdd
+  volumes:
+   - /home/canigo/demo-LAMP:/var/www/html/demo-LAMP
+  ports:
+   - 80:80
+
